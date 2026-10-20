@@ -4,7 +4,7 @@
 ##          (data recoding -> budget allocation analyses -> conjoint analyses).
 ## usage:   Open personal-emissions-budget-AAT.Rproj in RStudio and run: source("scripts/run_all.R")
 ##          or, from the project folder in a terminal: Rscript scripts/run_all.R
-## requires: data/data_clean_anonymised.csv (available on Zenodo, not included in this repository)
+## requires: data/data_anonymised.csv (available on Zenodo, not included in this repository)
 ############
 
 # 1. Checks -------------------------------------------------------------------
@@ -25,8 +25,8 @@ if (length(missing_packages) > 0) {
 }
 
 # Survey data
-if (!file.exists("data/data_clean_anonymised.csv")) {
-  stop("Data not found. Please download 'data_clean_anonymised.csv' from Zenodo and place it in the folder 'data/'.")
+if (!file.exists("data/data_anonymised.csv")) {
+  stop("Data not found. Please download 'data_anonymised.csv' from Zenodo and place it in the folder 'data/'.")
 }
 
 # 2. Output folders -----------------------------------------------------------

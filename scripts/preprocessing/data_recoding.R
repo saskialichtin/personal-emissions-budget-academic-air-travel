@@ -11,8 +11,8 @@ library(data.table)
 #Source functions
 source("scripts/functions.R")
 
-#load the cleaned and anonymised dataset (available on Zenodo)
-df <- read.csv("data/data_clean_anonymised.csv", sep = ",", dec=",")
+#load the anonymised dataset (available on Zenodo)
+df <- read.csv("data/data_anonymised.csv", sep = ",", dec=",")
 
 #Remove the first and second rows temporarily for analysis
 #Row 1: Survey question, Row 2: ImportId
@@ -208,14 +208,9 @@ df <- df %>%
     )
   )
 
-############################### Filter dataset to new sample for article ################################### 
-#Exclude BSc/MSc students and NAs
-df <- df %>%
-  filter(!role %in% c("Bachelor's or Master's student"),
-         !is.na(role))
-
-# Verify the number of responses after filtering
-cat("Number of rows:", nrow(df), "\n")
+############################### Data Cleaning ###################################
+# Number of complete responses before cleaning
+cat("Number of complete responses:", nrow(df), "\n")
 
 ############################### Data Cleaning 1: Excluding speeders ##################################
 # Convert duration column to numeric
@@ -232,11 +227,12 @@ summary(df$DurationMinutes)
 threshold <- 4
 
 # Filter data under threshold
+n_before <- nrow(df)
 df <- df %>%
   filter(DurationMinutes >= threshold)
 
 # Verify the number of responses after excluding speeders
-cat("Number of rows:", nrow(df), "\n")
+cat("Speeders excluded:", n_before - nrow(df), "| Number of rows:", nrow(df), "\n")
 
 ############################### Data Cleaning 2: Excluding inconsistencies ##################################
 # Add a new column to count inconsistencies per row; making sure NAs don't count (if one of the ratings is NA, it will not count as an inconsistency)
@@ -258,12 +254,26 @@ df <- df %>%
 df %>%
   count(Inconsistencies)
 
-#Exclude responses with 2 or more inconsistencies: Create a new dataframe
+#Exclude responses with 2 or more inconsistencies (responses with 1 inconsistency are retained): Create a new dataframe
 df_consistent <- df %>%
   filter(Inconsistencies < 2 | is.na(Inconsistencies))
 
 # Verify the result
-cat("Number of rows in df_consistent:", nrow(df_consistent), "\n")
+cat("Responses with 2 or more inconsistencies excluded:", nrow(df) - nrow(df_consistent),
+    "| Number of rows (cleaned full sample):", nrow(df_consistent), "\n")
+
+############################### Filter dataset to new sample for article ################################### 
+#Exclude BSc/MSc students and NAs (personal emissions budgets apply only to university staff)
+n_students <- sum(df_consistent$role %in% "Bachelor's or Master's student")
+n_no_role  <- sum(is.na(df_consistent$role))
+
+df_consistent <- df_consistent %>%
+  filter(!role %in% c("Bachelor's or Master's student"),
+         !is.na(role))
+
+# Verify the number of responses after filtering
+cat("BSc/MSc students excluded:", n_students, "| Role not indicated excluded:", n_no_role,
+    "| Number of rows (final sample):", nrow(df_consistent), "\n")
 
 ############################### Sample description ################################### 
 #Duration
