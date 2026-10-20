@@ -11,8 +11,8 @@ library(data.table)
 #Source functions
 source("scripts/functions.R")
 
-#load the pseudonymised dataset (private)
-df <- read.csv("data/250930_Cleaned_Responses_PSEUDON.csv", sep = ",", dec=",")
+#load the cleaned and anonymised dataset (available on Zenodo)
+df <- read.csv("data/data_clean_anonymised.csv", sep = ",", dec=",")
 
 #Remove the first and second rows temporarily for analysis
 #Row 1: Survey question, Row 2: ImportId

@@ -126,8 +126,8 @@ mm_df_control_choice_freq <- bind_rows(mm_list_control)
 mm_df_outcome_choice_freq <- bind_rows(mm_list_outcome)
 
 # Correct bias
-corrected_mm_df_control_choice_freq <- correct_bias_mm(mm_df_control_choice_freq)
-corrected_mm_df_outcome_choice_freq <- correct_bias_mm(mm_df_outcome_choice_freq)
+corrected_mm_df_control_choice_freq <- correct_bias_mm(mm_df_control_choice_freq, tau)
+corrected_mm_df_outcome_choice_freq <- correct_bias_mm(mm_df_outcome_choice_freq, tau)
 
 # Assign frame and evaluation
 corrected_mm_df_control_choice_freq <- assign_frame_and_evaluation(corrected_mm_df_control_choice_freq,"No framing (Control)", "Choice")

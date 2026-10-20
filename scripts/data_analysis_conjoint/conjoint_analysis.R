@@ -13,7 +13,7 @@ library(patchwork)
 #Source functions
 source("scripts/functions.R")
 
-#load the preprocessed dataset (private)
+#load the preprocessed dataset
 df_cj <- read.csv("data/Recoded_Conjoint_Data.csv", sep = ",", dec=",")
 
 ############################### Inspect and prepare data ################################### 
@@ -92,8 +92,8 @@ mm_df_outcome_choice_base <- get_marginal_means_df(m_outcome_choice_base, newdat
 mm_df_outcome_rate_base <- get_marginal_means_df(m_outcome_rate_base, newdata_vars_base)
 
 #Correct choice dfs
-corrected_mm_df_control_choice_base <- correct_bias_mm(mm_df_control_choice_base)
-corrected_mm_df_outcome_choice_base <- correct_bias_mm(mm_df_outcome_choice_base)
+corrected_mm_df_control_choice_base <- correct_bias_mm(mm_df_control_choice_base, tau)
+corrected_mm_df_outcome_choice_base <- correct_bias_mm(mm_df_outcome_choice_base, tau)
 
 #Assign frame and evaluation to dfs
 mm_df_control_rate_base <- assign_frame_and_evaluation(mm_df_control_rate_base, "No framing (Control)", "Rating")
@@ -203,10 +203,10 @@ figure_1_conjoint <- conjoint_choice + conjoint_rating +
 
 print(figure_1_conjoint)
 
-ggsave(figure_1_conjoint, filename = "plots/figure_1_conjoint.eps", width = 11, height = 8.5, unit="in", dpi = 300)
-ggsave(figure_1_conjoint, filename = "plots/figure_1_conjoint.png", width = 11, height = 8.5, unit="in", dpi = 300)
+ggsave(figure_1_conjoint, filename = "plots/Figure_1_conjoint.eps", width = 11, height = 8.5, unit="in", dpi = 300)
+ggsave(figure_1_conjoint, filename = "plots/Figure_1_conjoint.png", width = 11, height = 8.5, unit="in", dpi = 300)
 
-############################### Supplementary Figure A1: Conjoint experiment results of all attributes ################################### 
+############################### Supplementary Figure S1: Conjoint experiment results of all attributes ################################### 
 ## Choose which attributes to include in the plot, all:
 newdata_vars_all <- c("Attr_Economy", "Attr_Train", "Attr_SAF",
                       "Attr_Limit", "Attr_Rewards", "Attr_Sharing", 
@@ -219,8 +219,8 @@ mm_df_outcome_choice_all <- get_marginal_means_df(m_outcome_choice_base, newdata
 mm_df_outcome_rate_all <- get_marginal_means_df(m_outcome_rate_base, newdata_vars_all)
 
 #Correct choice dfs
-corrected_mm_df_control_choice_all <- correct_bias_mm(mm_df_control_choice_all)
-corrected_mm_df_outcome_choice_all <- correct_bias_mm(mm_df_outcome_choice_all)
+corrected_mm_df_control_choice_all <- correct_bias_mm(mm_df_control_choice_all, tau)
+corrected_mm_df_outcome_choice_all <- correct_bias_mm(mm_df_outcome_choice_all, tau)
 
 #Assign frame and evaluation to dfs
 mm_df_control_rate_all <- assign_frame_and_evaluation(mm_df_control_rate_all, "No framing (Control)", "Rating")

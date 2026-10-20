@@ -101,7 +101,7 @@ df_plot <- df_plot %>%
     )
   )
 
-######################## Figure 4: Plot all #################################
+######################## Figure 2: Plot all #################################
 
 budget_plot <- ggplot(df_plot, aes(x = pct, y = Q20_item_label, fill = response)) +
   geom_col(position = "stack", width = 0.6) +

@@ -83,9 +83,9 @@ get_marginal_means_by_group <- function(model, newdata_vars, group_var, group_le
 }
 
 ############################### Bias correction function ################################### 
-correct_bias_mm <- function(mm_df) {
+correct_bias_mm <- function(mm_df, tau) {
+  # mm_df: marginal means; tau: swapping error from calculate_tau()
   # Extract the uncorrected marginal mean and its variance
-  tau <- tau
   mm <- mm_df$estimate
   var_mm <- mm_df$std.error^2
   
