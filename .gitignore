@@ -10,5 +10,8 @@ data/
 *.sav
 *.RData
 
+# Ignore generated figures and tables
+plots/
+
 # Ignore macOS system file
 .DS_Store
