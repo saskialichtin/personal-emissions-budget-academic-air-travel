@@ -10,7 +10,7 @@ The study examines the feasibility of a personal emissions budget for academic a
 
 ## Data
 
-The anonymised survey data are available on Zenodo: **[link to Zenodo will be added]**
+The anonymised survey data are available on Zenodo: [doi.org/10.5281/zenodo.23512557](https://doi.org/10.5281/zenodo.23512557)
 
 The data consist of two files:
 
@@ -82,7 +82,7 @@ The analyses for the article were run with R 4.5.1 in December 2025. On 20 Octob
 
 ## Citation
 
-If you use this code, please cite the article (citation will be updated after publication) and this repository (DOI will be added after archiving on Zenodo).
+If you use this code, please cite the article and the archived version of this repository on Zenodo.
 
 ## License
 
