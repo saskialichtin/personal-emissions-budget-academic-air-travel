@@ -11,13 +11,8 @@ library(data.table)
 #Source functions
 source("scripts/functions.R")
 
-#load the anonymised dataset (available on Zenodo)
-df <- read.csv("data/data_anonymised.csv", sep = ",", dec=",")
-
-#Remove the first and second rows temporarily for analysis
-#Row 1: Survey question, Row 2: ImportId
-header_rows <- df[1:2, ]  # Store the first and second rows
-df <- df[-c(1, 2), ]  # Exclude the first and second rows for processing
+#load the anonymised dataset (available on Zenodo; question texts are in codebook.csv)
+df <- read.csv("data/data_anonymised.csv", sep = ",", dec=",", colClasses = "character")
 
 ############################### Data Recoding ################################### 
 #1) Conjoint experiment: Choice data
